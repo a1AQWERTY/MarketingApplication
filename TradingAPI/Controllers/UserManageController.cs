@@ -3,10 +3,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Net;
+using Trading.Data.BusinessEntity.RequestFilter;
+using Trading.Exception;
 using TradingAPI.Common;
 using TradingAPI.HandleRequest.Request.User;
+using TradingAPI.HandleRequest.Response.Users;
 
 namespace TradingAPI.Controllers
 {
@@ -23,20 +25,8 @@ namespace TradingAPI.Controllers
         }
         #endregion
 
-        /// <summary>
-        /// Get Users.
-        /// </summary>
-        // GET: api/Users
-        [HttpGet]
-        [ProducesResponseType(200)]
-        [ProducesResponseType(204)]
-        [ProducesResponseType(500)]
-        [Route("Users")]
-        public IActionResult GetUsers()
-        {
-
-            return NoContent();
-        }
+       
+       
 
         /// <summary>
         /// Add User.
@@ -53,6 +43,33 @@ namespace TradingAPI.Controllers
 
             return Ok(_mediator.Send(request).Result);
         }
+
+
+        /// <summary>
+        /// Get Item Master list.
+        /// </summary>
+        // Get: api/Items
+        [HttpGet]
+        [ProducesResponseType(typeof(ResponseListClass<List<ResponseGetUserList>>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(List<CustomException>), (int)HttpStatusCode.InternalServerError)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        [ProducesResponseType((int)HttpStatusCode.PreconditionFailed)]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
+        [Route("Users")]
+        public IActionResult GetUsers(int PageNo = 0, int PageSize = 10)
+        {
+
+            RequestUsers request = new RequestUsers();
+            request.requestFilter = new RequestFilter()
+            {
+                PageNo = PageNo,
+                PageSize = PageSize
+            };
+            SetIdentity(ref request);
+            return Ok(_mediator.Send(request).Result);
+        }
+
     }
 }
 

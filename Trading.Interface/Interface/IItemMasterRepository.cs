@@ -13,5 +13,7 @@ namespace Trading.Interface.Interface
     {
         Task<IQueryable<ItemDetailList>> GetItemDetailList();
         Task<bool> IsValidItem(Guid ItemMasterId);
+
+        Task<List<BoMItemDetails>> GetBoMItemDetails();
     }
 }

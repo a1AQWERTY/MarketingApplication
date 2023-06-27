@@ -4,10 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Trading.Interface.Interface;
-using System.Collections;
 using TradingAPI.HandleRequest.Request.ItemMaster;
-using Trading.Data.Entities;
-using TradingAPI.HandleRequest.Response;
 using System.Net;
 using MediatR;
 
@@ -15,11 +12,10 @@ using Microsoft.AspNetCore.Authorization;
 using TradingAPI.Common;
 using Trading.Exception;
 using TradingAPI.HandleRequest.Response.Item;
-using System.Threading;
 using Trading.Data.BusinessEntity.RequestFilter;
 using Microsoft.AspNetCore.Http;
 using TradingAPI.HandleRequest.Request.UploadMaster;
-
+using TradingAPI.Attributes;
 namespace TradingAPI.Controllers
 {
 
@@ -49,6 +45,7 @@ namespace TradingAPI.Controllers
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [Route("item")]
+       
         public IActionResult AddItem([FromBody] RequestItemAdd request)
         {
             SetIdentity<RequestItemAdd>(ref request);
@@ -107,6 +104,7 @@ namespace TradingAPI.Controllers
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [Route("items")]
+        [AllowAnonymous]
         public IActionResult GetItems(int PageNo = 0, int PageSize = 10)
         {
 

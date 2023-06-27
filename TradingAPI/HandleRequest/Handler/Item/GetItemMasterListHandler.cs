@@ -27,10 +27,12 @@ namespace TradingAPI.HandleRequest.Handler.Item
         }
         public async Task<ResponseListClass<List<ResponseGetItemMasterList>>> Handle(RequestGetItemMasterList request, CancellationToken cancellationToken)
         {
-            var itemMasterDataList = await _itemMasterRepository.GetItemDetailList();
-            int Count = 0;
+            //var data = _itemMasterRepository.GetBoMItemDetails().Result;
 
-            var itemData = itemMasterDataList.GetPaged(request.requestFilter.PageNo, request.requestFilter.PageSize, out Count);
+            var itemMasterDataList = await _itemMasterRepository.GetItemDetailList();
+             
+
+            var itemData = itemMasterDataList.GetPaged(request.requestFilter.PageNo, request.requestFilter.PageSize, out int Count);
 
             List<ResponseGetItemMasterList> responseGetItemMasterLists = new List<ResponseGetItemMasterList>();
 

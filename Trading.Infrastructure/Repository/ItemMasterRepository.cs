@@ -9,17 +9,14 @@ using Trading.Data.Entities;
 using Trading.Interface.Interface;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using Trading.Data.BusinessEntity.RequestFilter;
-using Trading.Infrastructure.Pagination;
+using Microsoft.Data.SqlClient;
 
 namespace Trading.Infrastructure.Repository
 {
     public class ItemMasterRepository : BaseRepository<ItemMaster>, IItemMasterRepository
     {
-        public readonly TradingContext _dbContext;
         public ItemMasterRepository(TradingContext dbContext) : base(dbContext)
         {
-            _dbContext = dbContext;
         }
 
         /// <summary>
@@ -52,6 +49,13 @@ namespace Trading.Infrastructure.Repository
         {
             return await (from itemMaster in _dbContext.ItemMaster
                           where itemMaster.ItemMasterId == ItemMasterId && !itemMaster.IsDeleted select itemMaster).AsQueryable().AnyAsync();
+        }
+
+        public  Task<List<BoMItemDetails>> GetBoMItemDetails()
+        {
+            var itemCode = new SqlParameter("@ItemCode", "Item0001");
+            var Data = _dbContext.BoMItemDetailsD.FromSqlRaw("EXECUTE dbo.sp_GettBomItemDetail @ItemCode" , itemCode);
+            return Task.FromResult(Data.ToList());
         }
     }
 }

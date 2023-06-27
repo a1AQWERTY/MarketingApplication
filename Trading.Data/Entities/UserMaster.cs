@@ -49,6 +49,7 @@ namespace Trading.Data.Entities
         [Column("UserUnId")]
 
         public string UserUnId { get; set; }
+        
         [Column("Password")]
         public string Password { get; set; }
     }

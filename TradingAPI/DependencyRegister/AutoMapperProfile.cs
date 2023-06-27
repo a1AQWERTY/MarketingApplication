@@ -8,6 +8,7 @@ using TradingAPI.HandleRequest.Request.Company;
 using TradingAPI.HandleRequest.Response;
 using TradingAPI.HandleRequest.Response.Item;
 using TradingAPI.HandleRequest.Response.Unit;
+using TradingAPI.HandleRequest.Response.Users;
 
 namespace TradingAPI.DependencyRegister
 {
@@ -39,6 +40,9 @@ namespace TradingAPI.DependencyRegister
 
             CreateMap<ItemInventoryList, ResponseGetItemWiseInventoryList>();
 
+            CreateMap<UserMaster, ResponseGetUserList>();
+
+            CreateMap<UserMaster, ResponseGetUserDetailById>();
         }
     }
 }

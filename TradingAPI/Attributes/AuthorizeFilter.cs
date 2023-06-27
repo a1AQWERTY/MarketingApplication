@@ -7,13 +7,16 @@ using System.Threading.Tasks;
 
 namespace TradingAPI.Attributes
 {
-    
 
-    public class AuthorizeFilter : IAuthorizationFilter
+
+    public class AuthorizeUserFilter : Attribute, IAuthorizationFilter
     {
-
-        public AuthorizeFilter()
+        private string _userType { get; set; }
+        private FontStyle _fontStyle { get; set; }
+        public AuthorizeUserFilter(string userType, FontStyle fontStyle)
         {
+            _userType = userType;
+            _fontStyle = fontStyle;
         }
 
         public void OnAuthorization(AuthorizationFilterContext context)
@@ -25,4 +28,14 @@ namespace TradingAPI.Attributes
             //}
         }
     }
+}
+
+[Flags]
+public enum FontStyle
+{
+    Bold = 1,
+    Italic = 2,
+    Regular = 0,
+    Strikeout = 8,
+    Underline = 4
 }

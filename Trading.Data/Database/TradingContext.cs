@@ -28,8 +28,16 @@ namespace Trading.Data.Database
 
         public DbSet<ItemBoMChild> ItemBoMChild { get; set; }
 
+        public DbSet<BoMItemDetails> BoMItemDetailsD { get; set; }
+
 
         private IDbContextTransaction _transaction;
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Ignore<BoMItemDetails>();
+            modelBuilder.Entity<BoMItemDetails>().HasNoKey();
+        }
 
         public void BeginTransaction()
         {
