@@ -18,7 +18,7 @@ jobs:
       run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build Docker image
-      run: docker build -t smitshah1991/tradingapp .
+      run: docker build -f TradingAPI\Dockerfile --force-rm -t smitshah1991/tradingapp .
 
     - name: Push Docker image
       run: docker push smitshah1991/tradingapp
