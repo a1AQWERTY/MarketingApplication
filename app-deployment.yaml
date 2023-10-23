@@ -14,10 +14,22 @@ spec:
     spec:
       containers:
       - name: test-api
-        image: smitshah1991/test-demo:latest
+        image: ${{ secrets.DOCKER_USERNAME }}/tradingapp:${{github.sha}}
         imagePullPolicy: "Always"
         ports:
         - containerPort: 80
         env:
         - name: ASPNETCORE_ENVIRONMENT
           value: "Development"
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: app-service
+spec:
+    type: NodePort
+    selector:
+        app: app-pod1
+    ports:
+        - port: 8080
+          targetPort: 8080
