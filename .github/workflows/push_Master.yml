@@ -31,4 +31,4 @@ jobs:
           context: .
           file: ./TradingAPI/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/tradingapp:${{github:run_number}}
+          tags: ${{ secrets.DOCKER_USERNAME }}/tradingapp:${{github.run_number}}
