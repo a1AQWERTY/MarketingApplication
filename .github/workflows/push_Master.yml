@@ -50,6 +50,5 @@ jobs:
     - name: Test service URLs
       run: |
         minikube service list
-        minikube service app-service --url
         kubectl get deployments  
     
