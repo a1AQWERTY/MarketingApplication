@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: app-pod1
+  template:
+    metadata:
+      labels:
+        app: app-pod1
+    spec:
+      containers:
+      - name: test-api
+        image: smitshah1991/test-demo:latest
+        imagePullPolicy: "Always"
+        ports:
+        - containerPort: 80
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Development"
