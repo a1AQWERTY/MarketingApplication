@@ -29,6 +29,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ./TradingAPI/Dokcerfile
+          file: ./TradingAPI/Dockerfile
           push: true
           tags: smitshah1991/tradingapp:latest
