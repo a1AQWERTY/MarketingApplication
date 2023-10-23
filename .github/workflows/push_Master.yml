@@ -51,5 +51,5 @@ jobs:
       run: |
         minikube service list
         minikube service app-service --url
-        kubectl get deployment -A  
+        kubectl get deployments  
     
