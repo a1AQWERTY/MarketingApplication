@@ -22,6 +22,7 @@ namespace TradingAPI.Controllers
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}")]
     [Authorize]
+    [AllowAnonymous]
     public class UnitManagementController : BaseController
     {
         public readonly IMediator _mediator;

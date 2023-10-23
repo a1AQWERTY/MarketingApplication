@@ -61,7 +61,9 @@ namespace TradingAPI.HandleRequest.Handler.Common
 
                 return responseUserDetail;
             }
-
+            else {
+                throw new  Exception("User Not Found");
+            }
             return null;
         }
 

@@ -31,6 +31,10 @@ namespace TradingAPI.HandleRequest.Handler.Item
             var itemBomList = await _itemBoMMasterRepository.GetItemBomList();
             int Count = 0;
 
+            Func<int, int,int> test = (number , number1)=> number * number1;
+
+            Console.WriteLine(test(5, 6));
+
             var itemBomData = itemBomList.GetPaged(request.requestFilter.PageNo, request.requestFilter.PageSize, out Count);
 
             List<ResponseGetItemBomList> responseItemInventoryList = new List<ResponseGetItemBomList>();
